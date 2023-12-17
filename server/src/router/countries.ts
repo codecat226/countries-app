@@ -5,26 +5,23 @@ import fetchExchangeRate from "../services/fixer";
 
 const router = Router();
 
-router.get("/:name", async (req: Request, res: Response) => {
-  const { name } = req.params;
+router.get("/:country", async (req: Request, res: Response) => {
+  const { country } = req.params;
   try {
-    const data = await fetchCountry(name);
-    const currencies = Object.keys(data.currencies)
-    console.log("currencies", currencies);
-    const rateData = await fetchExchangeRate(currencies)
-    console.log("rateData", rateData);
-    // add type
-    console.log(data);
+    const data = await fetchCountry(country);
+    const { currencies, name, population } = data;
+    const currenciesData = Object.keys(currencies);
+    const rateData = await fetchExchangeRate(currenciesData);
     const countryData = {
-      fullName: data.name.official,
-      population: data.population,
-      currencies: data.currencies,
+      fullName: name.official,
+      population: population,
+      currencies: currencies,
       rate: rateData,
-    }
+    };
     res.status(200).send(countryData);
   } catch (error) {
     console.log(error);
-    res.status(500).send({error: 'Internal server error'})
+    res.status(500).send({ error: "Internal server error" });
   }
 });
 

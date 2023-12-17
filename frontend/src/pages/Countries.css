@@ -1,0 +1,28 @@
+.mainContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.mainContainer__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.countryItem {
+  border: 2px solid black;
+  padding: 1px 10px;
+  border-radius: 2%;
+  background-color: aliceblue;
+}
+
+.countryList {
+  list-style-type: none;
+}
+
+.countryList li {
+  margin-bottom: 1rem;
+}
